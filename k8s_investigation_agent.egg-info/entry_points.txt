@@ -1,2 +1,0 @@
-[console_scripts]
-k8s-investigate = k8s_agent.cli:main
