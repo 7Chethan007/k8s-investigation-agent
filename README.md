@@ -1,0 +1,117 @@
+# Kubernetes Investigation Agent 🔍
+
+An enterprise-ready Kubernetes log investigation agent built with Python. It ingests container stdout/stderr, CRI-O/containerd streams, JSON structured logs, and Kubernetes events, detects anomalies across failure domains, and synthesizes root-cause analysis backed by verbatim log evidence and prescriptive remediation runbooks.
+
+---
+
+## ⚡ Features
+
+- **Multi-Format Ingestion**: Supports raw container logs, CRI-O / containerd timestamps, JSON logs (zap, bunyan, winston), multi-line stack traces (Go, Python, Java, Node.js), and Kubernetes event streams (`kubectl describe`).
+- **Comprehensive Failure Domain Detection**:
+  - `OOM_KILLED`: Exit code 137, cgroup limits, Linux kernel OOM killer, JVM heap exhaustion.
+  - `CRASH_LOOP_BACKOFF`: Process exit codes, uncaught exceptions, and panics.
+  - `PROBE_FAILURES`: Liveness, readiness, and startup probe timeouts and HTTP 5xx errors.
+  - `NETWORK_DNS_FAILURES`: CoreDNS throttling, lookup timeouts, upstream connection reset, broken pipes.
+  - `STORAGE_FAILURES`: `FailedMount`, `VolumeBindingFailed`, read-only filesystems.
+  - `RBAC_DENIED`: 403 Forbidden errors for ServiceAccounts querying the Kubernetes API.
+  - `DATABASE_EXHAUSTION`: Connection pool starvation, max clients reached, lock timeouts.
+  - `CONFIG_SECRET_MISSING`: `CreateContainerConfigError`, missing secrets/configmaps.
+- **Verbatim Evidence Extraction**: Automatically isolates trigger lines, line numbers, timestamps, and configurable context windows (lines before and after).
+- **Incident Timeline Reconstruction**: Sequences lifecycle milestones (Startup -> Degradation -> Failure Trigger -> Crash -> Backoff).
+- **Prescriptive Remediation**: Generates immediate tactical commands (`kubectl patch`, `kubectl describe`, etc.), long-term architectural prevention measures, and YAML manifest patches.
+- **Optional LLM Synthesis**: Seamlessly integrates with Google Gemini, Anthropic Claude, or OpenAI if API keys are set, while operating 100% deterministically and offline by default.
+- **CI/CD & Alert Automation Ready**: Supports JSON output mode (`--format json`) and automated gate enforcement with `--fail-on-critical` (returns exit code 2 on critical incidents).
+
+---
+
+## 🚀 Installation
+
+```bash
+git clone https://github.com/your-org/k8s-investigation-agent.git
+cd k8s-investigation-agent
+
+# Install dependencies and CLI tool in editable mode
+pip install -e .
+```
+
+---
+
+## 💻 CLI Usage
+
+### 1. Analyze a log file
+
+```bash
+k8s-investigate analyze samples/oom_killed.log
+```
+
+### 2. Stream logs directly from `kubectl` via pipe
+
+```bash
+kubectl logs deployment/payment-service -n prod --previous | k8s-investigate analyze -
+```
+
+### 3. Generate structured JSON for automation or alerting
+
+```bash
+k8s-investigate analyze samples/crashloop_db_exhaustion.log --format json -o incident-report.json
+```
+
+### 4. CI/CD Gate Enforcement (`--fail-on-critical`)
+
+Returns exit code `2` if a `CRITICAL` severity incident is discovered (e.g. OOMKilled or CrashLoopBackOff), causing pipeline checks to halt:
+
+```bash
+k8s-investigate analyze logs/canary.log --fail-on-critical
+```
+
+### 5. Optional LLM Post-Mortem Augmentation
+
+If `GEMINI_API_KEY`, `ANTHROPIC_API_KEY`, or `OPENAI_API_KEY` is exported in your environment:
+
+```bash
+export GEMINI_API_KEY="your-gemini-api-key"
+k8s-investigate analyze samples/oom_killed.log
+```
+
+---
+
+## 🧪 Testing
+
+Run the full pytest suite:
+
+```bash
+pytest -v tests/
+```
+
+---
+
+## 📁 Repository Structure
+
+```
+k8s-investigation-agent/
+├── k8s_agent/
+│   ├── __init__.py         # Package exports
+│   ├── models.py           # Pydantic data schemas
+│   ├── parser.py           # Multi-format log parser
+│   ├── detectors.py        # Diagnostic catalog & pattern rules
+│   ├── timeline.py         # Lifecycle timeline sequencer
+│   ├── engine.py           # Investigation coordinator
+│   ├── reporter.py         # Terminal, Markdown, JSON formatters
+│   ├── llm.py              # Optional LLM integration
+│   └── cli.py              # Click command-line interface
+├── samples/                # Realistic failure scenario logs
+│   ├── oom_killed.log
+│   ├── crashloop_db_exhaustion.log
+│   ├── liveness_probe_failure.log
+│   ├── dns_resolution_failure.log
+│   ├── image_pull_backoff.log
+│   └── rbac_forbidden.log
+├── tests/                  # Unit and integration test suite
+├── pyproject.toml
+└── requirements.txt
+```
+
+---
+
+## 📄 License
+Apache-2.0

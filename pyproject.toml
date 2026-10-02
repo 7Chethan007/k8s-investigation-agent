@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "k8s-investigation-agent"
+version = "0.1.0"
+description = "Enterprise Kubernetes log investigation agent for automated root-cause analysis with supporting evidence"
+authors = [{ name = "SRE & Platform Engineering Team" }]
+license = "Apache-2.0"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "click>=8.1.0",
+    "pydantic>=2.0.0",
+    "rich>=13.0.0",
+    "requests>=2.31.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-cov>=4.0.0",
+]
+
+[project.scripts]
+k8s-investigate = "k8s_agent.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["k8s_agent*"]

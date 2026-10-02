@@ -1,0 +1,4 @@
+2026-10-02T21:00:00.001Z stdout F [INFO] Starting cert-manager-controller v1.14.0
+2026-10-02T21:00:02.100Z stdout F [INFO] Syncing CertificateRequests in namespace staging
+2026-10-02T21:00:03.450Z stderr F [ERROR] controllers/certificaterequests "msg"="Re-queuing item due to error" "error"="secrets is forbidden: User \"system:serviceaccount:cert-manager:cert-manager-controller\" cannot create resource \"secrets\" in API group \"\" in the namespace \"staging\": HTTP status 403 Forbidden"
+2026-10-02T21:00:05.100Z stderr F [ERROR] controllers/certificaterequests "msg"="Re-queuing item due to error" "error"="secrets is forbidden: User \"system:serviceaccount:cert-manager:cert-manager-controller\" cannot create resource \"secrets\" in API group \"\" in the namespace \"staging\": HTTP status 403 Forbidden"

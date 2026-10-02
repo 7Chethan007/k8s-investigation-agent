@@ -1,0 +1,6 @@
+Normal   Scheduled  45s  default-scheduler  Successfully assigned staging/frontend-ui-7d89b9d4c-x92zk to node-pool-1
+Normal   Pulling    44s  kubelet            Pulling image "asia-docker.pkg.dev/company-prod/web/frontend:v3.2.0"
+Warning  Failed     30s  kubelet            Failed to pull image "asia-docker.pkg.dev/company-prod/web/frontend:v3.2.0": rpc error: code = Unknown desc = failed to pull and unpack image: failed to resolve reference: unauthorized: authentication required
+Warning  Failed     30s  kubelet            Error: ErrImagePull
+Normal   BackOff    15s  kubelet            Back-off pulling image "asia-docker.pkg.dev/company-prod/web/frontend:v3.2.0"
+Warning  Failed     15s  kubelet            Error: ImagePullBackOff

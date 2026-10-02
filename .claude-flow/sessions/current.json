@@ -1,0 +1,12 @@
+{
+  "id": "session-1790962124103",
+  "startedAt": "2026-10-02T17:28:44.103Z",
+  "cwd": "/Users/chethanmn/Desktop/Growth/k8s-investigation-agent",
+  "context": {},
+  "metrics": {
+    "edits": 0,
+    "commands": 0,
+    "tasks": 0,
+    "errors": 0
+  }
+}

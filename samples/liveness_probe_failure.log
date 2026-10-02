@@ -1,0 +1,8 @@
+2026-10-02T19:30:00.000Z stdout F [INFO] Web server running on 0.0.0.0:8080
+2026-10-02T19:30:15.110Z stdout F [INFO] Handling GET /healthz - 200 OK (latency: 1.2ms)
+2026-10-02T19:30:45.320Z stdout F [WARN] Incoming traffic surge: concurrency limit reached (500/500 active threads)
+2026-10-02T19:31:00.120Z stdout F [WARN] Event loop delay high: 4500ms
+Warning  Unhealthy  40s  kubelet  Liveness probe failed: HTTP probe failed with statuscode: 500
+Warning  Unhealthy  30s  kubelet  Liveness probe failed: HTTP probe failed with statuscode: 500
+Warning  Unhealthy  20s  kubelet  Liveness probe failed: connection refused
+Normal   Killing    10s  kubelet  Container web-app failed liveness probe, will be restarted

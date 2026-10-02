@@ -1,0 +1,14 @@
+2026-10-02T19:00:10.001Z stdout F [INFO] Initializing OrderPaymentService worker pool size=50
+2026-10-02T19:00:12.420Z stdout F [INFO] Connecting to postgres-rw.database.svc.cluster.local:5432/orders_db
+2026-10-02T19:00:18.150Z stdout F [INFO] Database connection pool established: max=100, idle=10
+2026-10-02T19:00:45.312Z stdout F [WARN] Active DB connections spiked to 98/100
+2026-10-02T19:01:02.890Z stderr F [ERROR] org.postgresql.util.PSQLException: FATAL: remaining connection slots are reserved for non-replication superuser connections
+2026-10-02T19:01:05.120Z stderr F [ERROR] Connection pool exhausted: Timeout waiting for idle object in pool
+2026-10-02T19:01:08.310Z stderr F panic: runtime error: database connection failure: connection pool exhausted
+2026-10-02T19:01:08.311Z stderr F goroutine 1 [running]:
+2026-10-02T19:01:08.312Z stderr F main.mustInitDatabase(0xc0000a2000)
+2026-10-02T19:01:08.313Z stderr F 	/app/cmd/service/main.go:88 +0x345
+2026-10-02T19:01:08.314Z stderr F main.main()
+2026-10-02T19:01:08.315Z stderr F 	/app/cmd/service/main.go:34 +0x45
+2026-10-02T19:01:10.000Z stderr F Back-off restarting failed container
+Warning  BackOff  5s  kubelet  Back-off restarting failed container

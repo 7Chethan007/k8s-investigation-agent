@@ -1,0 +1,6 @@
+2026-10-02T20:10:00.123Z stdout F [INFO] Starting PaymentGatewayWorker instance #3
+2026-10-02T20:10:01.000Z stdout F [INFO] Ready to process payment transactions
+2026-10-02T20:10:14.200Z stderr F [ERROR] Failed to forward transaction 98214: Post "https://order-service.production.svc.cluster.local/v1/orders": dial tcp: lookup order-service.production.svc.cluster.local on 10.96.0.10:53: i/o timeout
+2026-10-02T20:10:18.410Z stderr F [ERROR] Post "https://order-service.production.svc.cluster.local/v1/orders": dial tcp: lookup order-service.production.svc.cluster.local on 10.96.0.10:53: i/o timeout
+2026-10-02T20:10:22.500Z stderr F [FATAL] Critical dependency unavailable: lookup order-service.production.svc.cluster.local on 10.96.0.10:53: no such host
+2026-10-02T20:10:22.505Z stderr F [FATAL] Could not resolve host: order-service.production.svc.cluster.local

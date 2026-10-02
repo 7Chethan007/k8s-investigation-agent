@@ -1,0 +1,11 @@
+2026-10-02T18:14:00.102Z stdout F [INFO] Starting DataIngestionWorker v2.4.1 on port 9090
+2026-10-02T18:14:01.350Z stdout F [INFO] Connected to Kafka broker at kafka-cluster.messaging.svc.cluster.local:9092
+2026-10-02T18:14:05.811Z stdout F [INFO] Subscribed to topic: analytics-events-partition-0
+2026-10-02T18:14:15.201Z stdout F [INFO] Ingesting batch #1041: 50,000 records (allocated: 240MB / 1024MB)
+2026-10-02T18:14:32.410Z stdout F [INFO] Ingesting batch #1042: 120,000 records (allocated: 580MB / 1024MB)
+2026-10-02T18:14:48.910Z stdout F [WARN] High memory watermark reached: 890MB / 1024MB (86.9%)
+2026-10-02T18:15:02.105Z stdout F [WARN] GC pause duration 1240ms exceeds threshold
+2026-10-02T18:15:05.441Z stderr F [FATAL] Memory allocation of 268435456 bytes failed. Invoking GC.
+2026-10-02T18:15:06.110Z stderr F Out of memory: Kill process 1248 (data-worker) score 982 or sacrifice child
+2026-10-02T18:15:06.115Z stderr F memory cgroup out of memory: kill process 1248 (data-worker)
+2026-10-02T18:15:06.502Z stderr F command terminated with exit code 137
